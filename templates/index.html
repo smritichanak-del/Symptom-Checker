@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Health Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="top-bar">
+    <h2>🩺 Health Checker</h2>
+    
+</div>
+
+<div class="container">
+
+    <form method="POST" onsubmit="showLoader()">
+        <div class="input-group">
+            <input list="symptoms" name="symptom" placeholder="Search symptom or type your own..." autofocus required>
+            <button type="submit">Check</button>
+        </div>
+
+        <datalist id="symptoms">
+            <option value="fever">
+            <option value="cough">
+            <option value="headache">
+            <option value="cold">
+            <option value="nausea">
+            <option value="sore throat">
+            <option value="fatigue">
+            <option value="dizziness">
+            <option value="rash">
+            <option value="stomach pain">
+            <option value="back pain">
+            <option value="joint pain">
+            <option value="runny nose">
+            <option value="sneezing">
+            <option value="chest pain">
+            <option value="shortness of breath">
+            <option value="vomiting">
+            <option value="diarrhea">
+            <option value="muscle pain">
+            <option value="insomnia">
+            <option value="anxiety">
+            <option value="depression">
+        </datalist>
+    </form>
+
+    <div id="loader" class="loader"></div>
+
+    {% if result %}
+    <div class="result-card">
+        <h3>Diagnosis</h3>
+        <p class="primary">{{ result }}</p>
+        {% if detailed %}
+        <p class="details">{{ detailed }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> This tool is for educational purposes only and not a substitute for medical advice.
+    </div>
+
+</div>
+
+<script>
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+</script>
+
+</body>
+</html>

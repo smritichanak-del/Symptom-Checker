@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #2193b0, #6dd5ed);
+    transition: 0.3s;
+}
+
+/* Top bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    color: white;
+}
+
+.top-bar button {
+    background: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+/* Input group */
+.input-group {
+    display: flex;
+    width: min(540px, 90vw);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+button {
+    margin-top: 0;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2a72d5, #1c9ce1);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #1e5eb5, #148ac6);
+    transform: translateY(-1px);
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Loader */
+.loader {
+    display: none;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Result */
+.result-card {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: min(540px, 90vw);
+    text-align: center;
+}
+
+.result-card h3 {
+    margin: 0 0 10px;
+    color: #1d4267;
+}
+
+.result-card .primary {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #0b314f;
+}
+
+.result-card .details {
+    margin-top: 8px;
+    color: #334254;
+    line-height: 1.5;
+}
+
+.disclaimer {
+    margin-top: 16px;
+    font-size: 0.82rem;
+    color: #ffffffcc;
+    max-width: min(540px, 90vw);
+    text-align: center;
+}
+
+/* Dark mode */
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .result-card {
+    background: #1e1e1e;
+}

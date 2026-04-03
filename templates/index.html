@@ -1,76 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Smart Health Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom-Checker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<div class="top-bar">
-    <h2>🩺 Health Checker</h2>
-    
-</div>
 
-<div class="container">
 
-    <form method="POST" onsubmit="showLoader()">
-        <div class="input-group">
-            <input list="symptoms" name="symptom" placeholder="Search symptom or type your own..." autofocus required>
-            <button type="submit">Check</button>
+<!-- Main Container -->
+<main class="container">
+    <!-- Header Section -->
+    <section class="header-section">
+        <div class="header-content">
+            
+            <h1> Symptom(Health) Checker</h1>
+            <p>Identify potential health conditions in seconds using AI-powered analysis</p>
         </div>
+        
+    </section>
 
-        <datalist id="symptoms">
-            <option value="fever">
-            <option value="cough">
-            <option value="headache">
-            <option value="cold">
-            <option value="nausea">
-            <option value="sore throat">
-            <option value="fatigue">
-            <option value="dizziness">
-            <option value="rash">
-            <option value="stomach pain">
-            <option value="back pain">
-            <option value="joint pain">
-            <option value="runny nose">
-            <option value="sneezing">
-            <option value="chest pain">
-            <option value="shortness of breath">
-            <option value="vomiting">
-            <option value="diarrhea">
-            <option value="muscle pain">
-            <option value="insomnia">
-            <option value="anxiety">
-            <option value="depression">
-        </datalist>
-    </form>
+    <!-- Search Form -->
+    <section class="search-section">
+        <form method="POST" onsubmit="showLoader()" class="search-form">
+            <div class="input-wrapper">
+                <i class="fas fa-search icon-search"></i>
+                <input 
+                    list="symptoms" 
+                    name="symptom" 
+                    placeholder="Describe your symptom..." 
+                    autofocus 
+                    required
+                    class="symptom-input"
+                >
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>Check Now</span>
+                </button>
+            </div>
 
-    <div id="loader" class="loader"></div>
+            <datalist id="symptoms">
+                <option value="fever">
+                <option value="cough">
+                <option value="headache">
+                <option value="cold">
+                <option value="nausea">
+                <option value="sore throat">
+                <option value="fatigue">
+                <option value="dizziness">
+                <option value="rash">
+                <option value="stomach pain">
+                <option value="back pain">
+                <option value="joint pain">
+                <option value="runny nose">
+                <option value="sneezing">
+                <option value="chest pain">
+                <option value="shortness of breath">
+                <option value="vomiting">
+                <option value="diarrhea">
+                <option value="muscle pain">
+                <option value="insomnia">
+                <option value="anxiety">
+                <option value="depression">
+            </datalist>
+        </form>
 
+        <!-- Loader -->
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+            <p>Analyzing your symptoms...</p>
+        </div>
+    </section>
+
+    <!-- Results Section -->
     {% if result %}
-    <div class="result-card">
-        <h3>Diagnosis</h3>
-        <p class="primary">{{ result }}</p>
-        {% if detailed %}
-        <p class="details">{{ detailed }}</p>
-        {% endif %}
-    </div>
+    <section class="results-section">
+        <div class="result-card">
+            <div class="result-header">
+                <div class="icon-badge">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h2>Analysis Result</h2>
+            </div>
+            
+            <div class="result-body">
+                <div class="diagnosis-box">
+                    <label class="label">Diagnosis</label>
+                    <p class="diagnosis-text">{{ result }}</p>
+                </div>
+
+                {% if detailed %}
+                <div class="details-box">
+                    <label class="label">Details</label>
+                    <p class="details-text">{{ detailed }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="result-footer">
+                <a href="/" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i>
+                    Check Another Symptom
+                </a>
+            </div>
+        </div>
+    </section>
     {% endif %}
 
-    <div class="disclaimer">
-        <strong>Disclaimer:</strong> This tool is for educational purposes only and not a substitute for medical advice.
-    </div>
+    <!-- Disclaimer Section -->
+    <section class="disclaimer-section">
+        <div class="disclaimer-card">
+            <i class="fas fa-exclamation-triangle disclaimer-icon"></i>
+            <div class="disclaimer-content">
+                <h3>Important Disclaimer</h3>
+                <p>This tool is for <strong>educational and informational purposes only</strong>. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider for any health concerns.</p>
+            </div>
+        </div>
+    </section>
 
-</div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2026 HealthCheck Pro. All rights reserved.</p>
+</footer>
 
 <script>
 function toggleDark() {
     document.body.classList.toggle("dark");
+    const icon = document.querySelector('.theme-toggle i');
+    if (document.body.classList.contains('dark')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+    }
 }
 
 function showLoader() {
-    document.getElementById("loader").style.display = "block";
+    document.getElementById("loader").style.display = "flex";
 }
+
+// Restore theme preference
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+        document.querySelector('.theme-toggle i').classList.add('fa-sun');
+        document.querySelector('.theme-toggle i').classList.remove('fa-moon');
+    }
+});
 </script>
 
 </body>

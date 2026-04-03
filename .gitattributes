@@ -1,1 +1,3 @@
 *.py linguist-language=Python
+*.css linguist-vendored
+*.html linguist-vendored

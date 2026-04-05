@@ -1,1 +1,1 @@
-URL - "https://symptom-checker-qqw0.onrender.com"
+#url is  - "https://symptom-checker-qqw0.onrender.com"
